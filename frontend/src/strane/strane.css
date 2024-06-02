@@ -1,0 +1,12 @@
+.prvidivic {
+    margin-top: 12rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    background-size: contain;
+    background-attachment: fixed;
+  }
+  
