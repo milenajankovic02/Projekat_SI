@@ -4,27 +4,21 @@ import { jwtDecode } from 'jwt-decode';
 
 const generateAvailableSlots = () => {
   const availableSlots = [];
-  const startHour = 8; // Početak radnog vremena
-  const endHour = 20; // Kraj radnog vremena
+  const startHour = 8;
+  const endHour = 20;
 
   for (let hour = startHour; hour < endHour; hour++) {
-    const slot = `${hour.toString().padStart(2, '0')}:00`; // Formatiramo sat kao HH:00
+    const slot = `${hour.toString().padStart(2, '0')}:00`;
     availableSlots.push(slot);
   }
 
   return availableSlots;
 };
 
-const isFutureDate = (date) => {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Postavljamo vreme na ponoć kako bismo uporedili samo datume
-  return date > today;
-};
-
 const getEmailFromToken = (token) => {
   try {
-    const decoded = jwtDecode(token); // Koristimo ispravno ime funkcije
-    return decoded.email; // Pretpostavljam da se email nalazi u payloadu tokena
+    const decoded = jwtDecode(token);
+    return decoded.email;
   } catch (error) {
     console.error('Greška prilikom dekodiranja tokena:', error);
     return null;
@@ -34,14 +28,14 @@ const getEmailFromToken = (token) => {
 const Schedule = () => {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState('');
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
   const [professors, setProfessors] = useState([]);
   const [selectedProfessor, setSelectedProfessor] = useState('');
-  const [levels, setLevels] = useState(['Niza osnovna škola', 'Visa osnovna škola', 'Niža srednja škola', 'Visa srednja škola']);
-  const [selectedLevel, setSelectedLevel] = useState('');
   const [price, setPrice] = useState('');
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const [availableSlots, setAvailableSlots] = useState([]);
+  const [availableSlots, setAvailableSlots] = useState(generateAvailableSlots());
 
   useEffect(() => {
     const fetchSubjects = async () => {
@@ -53,59 +47,71 @@ const Schedule = () => {
       }
     };
 
+    const fetchCities = async () => {
+      try {
+        const response = await axios.get('http://localhost:8082/gradovi');
+        setCities(response.data);
+      } catch (error) {
+        console.error('Greška prilikom dohvatanja gradova:', error);
+      }
+    };
+
     fetchSubjects();
+    fetchCities();
   }, []);
 
-  useEffect(() => {
-    // Generisanje dostupnih termina i filtriranje nedelje i prošlih dana
-    const slots = generateAvailableSlots().filter(slot => {
-      const currentDate = new Date();
-      const [hours] = slot.split(':');
-      currentDate.setHours(hours); // Postavljamo trenutni sat kako bismo mogli da proverimo da li je danas
-      return currentDate.getDay() !== 0 && isFutureDate(currentDate);
-    });
-    setAvailableSlots(slots);
-  }, []);
-
-  const handleSubjectChange = async (subjectName) => {
+  const handleSubjectChange = (subjectName) => {
     setSelectedSubject(subjectName);
+    setProfessors([]);
+    setSelectedProfessor('');
+    setPrice('');
+  };
+
+  const handleCityChange = async (cityName) => {
+    setSelectedCity(cityName);
+
     try {
-      const response = await axios.get(`http://localhost:8082/profesori/predmet/${subjectName}`);
+      const response = await axios.get('http://localhost:8082/profesori/pretraga', {
+        params: {
+          predmet: selectedSubject,
+          grad: cityName
+        }
+      });
       setProfessors(response.data);
-      setSelectedProfessor(''); // Resetujemo izabrane profesore i cene kad promenimo predmet
+      setSelectedProfessor('');
       setPrice('');
     } catch (error) {
-      console.error('Greška prilikom dohvatanja profesora za predmet:', error);
+      console.error('Greška prilikom dohvatanja profesora:', error);
     }
   };
 
   const handleProfessorChange = (professorEmail) => {
-    const professor = professors.find(professor => professor.email === professorEmail);
+    const professor = professors.find(p => p.email === professorEmail);
     setSelectedProfessor(professorEmail);
     setPrice(professor ? professor.cijena : '');
   };
 
   const handleSubmit = async () => {
     try {
-      const token = localStorage.getItem('token'); // Pretpostavljamo da je token sačuvan u localStorage
-      const email = getEmailFromToken(token);
+        const token = localStorage.getItem('token');
+        const email = getEmailFromToken(token);
 
-      // Slanje zahteva za zakazivanje časa na backend
-      const response = await axios.post('http://localhost:8082/zakazani_casovi', {
-        email,
-        profesor: selectedProfessor,
-        predmet: selectedSubject,
-        cijena: price,
-        datum: date,
-        vrijeme: time
-      });
-      console.log('Zakazivanje uspješno:', response.data);
-      alert('Uspješno zakazano!');
-      // Dodatne akcije nakon uspešnog zakazivanja, na primer, redirekcija na stranicu sa potvrdom
+        const response = await axios.post('http://localhost:8082/casovi', {
+            korisnik: email,
+            profesor: selectedProfessor,
+            predmet: selectedSubject,
+            datum: date,
+            vrijeme: time
+        });
+        console.log('Zakazivanje uspješno:', response.data);
+        alert('Uspješno zakazano!');
     } catch (error) {
-      console.error('Greška prilikom zakazivanja časa:', error);
+        console.error('Greška prilikom zakazivanja časa:', error);
     }
-  };
+};
+
+  
+
 
   return (
     <div>
@@ -114,23 +120,23 @@ const Schedule = () => {
       <select value={selectedSubject} onChange={(e) => handleSubjectChange(e.target.value)}>
         <option value="">Odaberite predmet</option>
         {subjects.map(subject => (
-          <option key={subject.naziv} value={subject.naziv}>{subject.naziv}</option>
+          <option key={subject} value={subject}>{subject}</option>
+        ))}
+      </select>
+
+      <label>Odaberite grad:</label>
+      <select value={selectedCity} onChange={(e) => handleCityChange(e.target.value)}>
+        <option value="">Odaberite grad</option>
+        {cities.map(city => (
+          <option key={city} value={city}>{city}</option>
         ))}
       </select>
 
       <label>Odaberite profesora:</label>
-      <select value={selectedProfessor} onChange={(e) => handleProfessorChange(e.target.value)} disabled={!selectedSubject}>
+      <select value={selectedProfessor} onChange={(e) => handleProfessorChange(e.target.value)}>
         <option value="">Odaberite profesora</option>
         {professors.map(professor => (
           <option key={professor.email} value={professor.email}>{professor.ime} {professor.prezime}</option>
-        ))}
-      </select>
-
-      <label>Odaberite nivo:</label>
-      <select value={selectedLevel} onChange={(e) => setSelectedLevel(e.target.value)} disabled={!selectedProfessor}>
-        <option value="">Odaberite nivo</option>
-        {levels.map(level => (
-          <option key={level} value={level}>{level}</option>
         ))}
       </select>
 
@@ -138,17 +144,17 @@ const Schedule = () => {
       <input type="text" value={price} disabled />
 
       <label>Datum:</label>
-      <input type="date" min={new Date().toISOString().split('T')[0]} value={date} onChange={(e) => setDate(e.target.value)} disabled={!selectedProfessor} />
+      <input type="date" min={new Date().toISOString().split('T')[0]} value={date} onChange={(e) => setDate(e.target.value)} />
 
-      <label>Vreme:</label>
-      <select value={time} onChange={(e) => setTime(e.target.value)} disabled={!selectedProfessor}>
-        <option value="">Odaberite vreme</option>
+      <label>Vrijeme:</label>
+      <select value={time} onChange={(e) => setTime(e.target.value)}>
+        <option value="">Odaberite vrijeme</option>
         {availableSlots.map(slot => (
           <option key={slot} value={slot}>{slot}</option>
         ))}
       </select>
 
-      <button onClick={handleSubmit} disabled={!selectedProfessor || !date || !time}>Zakaži</button>
+      <button onClick={handleSubmit}>Zakaži</button>
     </div>
   );
 };

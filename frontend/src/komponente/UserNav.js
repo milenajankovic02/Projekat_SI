@@ -1,17 +1,25 @@
-// UserNav.js
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-const UserNav = () => {
+import '../strane/Pocetna.css'
+import { HashLink as Link } from 'react-router-hash-link'
+function UserNav() {
   return (
-    <nav>
-      <ul>
-        <li><Link to="/">Pocetna</Link></li>
+    <header>
+      <input type="checkbox" id="toggler" />
+      <label htmlFor="toggler" className="fas fa-bars"></label>
+      <a href="#" className="logo">All A's<span>.</span></a>
+      <nav className="navbar">
+        <Link to="/#pocetna">Početna</Link>
+        <Link to="/#about">O nama</Link>
+        <Link to="/#kontakt">Kontakt</Link>
+        <Link to="/search">Pretraži profesore</Link>
         <Link to="/profile">Profil</Link>
-        <li><Link to="/zakazi">Zakazi Cas</Link></li>
-        <li><Link to="/logout">Logout</Link></li> {/* Dodaj logout link */}
-      </ul>
-    </nav>
+      </nav>
+      <div className="icons">
+        <a href="/" className="fa-solid fa-pen"></a>
+        <a href="/" className="fa-solid fa-pen"></a>
+        <a href="/" className="fa-solid fa-pen"></a>
+      </div>
+    </header>
   );
 }
 

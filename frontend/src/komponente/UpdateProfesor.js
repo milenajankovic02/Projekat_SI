@@ -18,7 +18,8 @@ const UpdateProfesor = () => {
   const [selectedPredmeti, setSelectedPredmeti] = useState([]);
   const [selectedPredmet, setSelectedPredmet] = useState({
     naziv: '',
-    cijena: ''
+    cijena: '',
+    grad: '' // Add grad to handle the grad for the subject
   });
 
   const navigate = useNavigate();
@@ -71,7 +72,7 @@ const UpdateProfesor = () => {
   };
 
   const handleAddPredmet = () => {
-    setSelectedPredmeti(prevPredmeti => ([...prevPredmeti, { naziv: '', cijena: '' }]));
+    setSelectedPredmeti(prevPredmeti => ([...prevPredmeti, { naziv: '', cijena: '', grad: '' }]));
   };
 
   const handleSubmit = async (e) => {
@@ -79,7 +80,7 @@ const UpdateProfesor = () => {
     try {
       await axios.put(`http://localhost:8082/profesori/${email}`, formData);
       alert('Podaci o profesoru su uspješno ažurirani!');
-      navigate('/profesori');
+      navigate('/profesors');
     } catch (error) {
       console.error('Greška prilikom ažuriranja podataka o profesoru:', error);
       alert('Došlo je do greške prilikom ažuriranja podataka o profesoru.');
@@ -89,14 +90,14 @@ const UpdateProfesor = () => {
   const handleAddNewPredmet = async () => {
     try {
       const predmetData = {
-        profesor: profesor.email, // Prilagođeno za slanje email-a profesora
-        predmeti: selectedPredmeti // Koristimo stanje odabranih predmeta
+        profesor: profesor.email,
+        predmeti: selectedPredmeti
       };
 
       const response = await axios.post(`http://localhost:8082/profesor_predmet`, predmetData);
       if (response.status === 200) {
         alert('Predmet uspješno dodan profesoru!');
-        setSelectedPredmet({ naziv: '', cijena: '' });
+        setSelectedPredmet({ naziv: '', cijena: '', grad: '' });
       } else {
         alert('Došlo je do greške prilikom dodavanja predmeta profesoru.');
       }
@@ -159,7 +160,7 @@ const UpdateProfesor = () => {
           name="email"
           value={formData.email} 
           required
-          disabled // Ne može se menjati jer je primarni ključ
+          disabled 
           onChange={handleChange}
         />
         <select 
@@ -201,6 +202,15 @@ const UpdateProfesor = () => {
               step="0.01"
               onChange={(e) => handlePredmetiChange(index, 'cijena', e.target.value)}
             />
+            <select
+              value={predmet.grad}
+              required
+              onChange={(e) => handlePredmetiChange(index, 'grad', e.target.value)}>
+              <option value="">Odaberi grad</option>
+              {gradovi.map(g => (
+                <option key={g} value={g}>{g}</option>
+              ))}
+            </select>
           </div>
         ))}
         <button type="button" onClick={handleAddNewPredmet}>

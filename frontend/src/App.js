@@ -13,10 +13,12 @@ import AdminNav from './komponente/AdminNav';
 import './komponente/sve.css';
 import Logout from './komponente/Logout';
 import Profesors from './komponente/Profesors';
+import Students from './komponente/Students';
 import UpdateProfesor from './komponente/UpdateProfesor';
 import { jwtDecode } from 'jwt-decode';
 import ZakazaniCasovi from './komponente/ZakazaniCasovi';
-
+import StudentProfile from './komponente/StudentProfile';
+import SearchProf from './komponente/SearchProf';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -42,9 +44,12 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/logout" element={<Logout setUser={setUser} />} />
           <Route path="/profesors" element={<Profesors />} />
+          <Route path="/students" element={<Students/>}/>
           <Route path="/zakazi" element={<Schedule />} />
           <Route path="/update/:email" element={<UpdateProfesor />} />
           <Route path="/zakazaniCasovi" element={<ZakazaniCasovi/>}/>
+          <Route path="/profile" element={<StudentProfile/>}/>
+          <Route path="/search" element={<SearchProf/>}/>
         </Routes>
         <Footer />
       </Router>

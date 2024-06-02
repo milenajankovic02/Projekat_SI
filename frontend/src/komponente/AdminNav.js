@@ -17,6 +17,7 @@ const AdminNav = () => {
         <Link to="/#kontakt">Kontakt</Link>
         <Link to="/zakazaniCasovi">Zakazani časovi</Link>
         <Link to="/profesors">Pregledaj profesore</Link>
+        <Link to="/students">Pregledaj studente</Link>
         <Link to="/logout">Odjavi se</Link>
       </nav>
       <div className="icons">

@@ -66,8 +66,8 @@ const Profesors = () => {
             <p> Nivo: {profesor.nivo} </p>
             <p> Predmeti:</p>
             <ul>
-              {profesor.predmeti && profesor.predmeti.map(predmet => (
-                <li key={predmet.naziv}>{predmet.naziv} - {predmet.cijena} €</li>
+              {profesor.predmeti && profesor.predmeti.map((predmet, index) => (
+                <li key={index}>{predmet.naziv} - {predmet.cijena} €</li>
               ))}
             </ul>
 

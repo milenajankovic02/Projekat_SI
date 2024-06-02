@@ -50,10 +50,10 @@ const AddProf = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await axios.post('http://localhost:8082/profesori', profesor);
-  
+
       if (response.status === 200) {
         alert('Profesor uspješno dodat u bazu!');
         navigate('/profesori');
