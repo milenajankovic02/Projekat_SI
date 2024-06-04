@@ -64,13 +64,7 @@ const Profesors = () => {
             <p> Telefon: {profesor.tel} </p>
             <p> Email: {profesor.email} </p>
             <p> Nivo: {profesor.nivo} </p>
-            <p> Predmeti:</p>
-            <ul>
-              {profesor.predmeti && profesor.predmeti.map((predmet, index) => (
-                <li key={index}>{predmet.naziv} - {predmet.cijena} €</li>
-              ))}
-            </ul>
-
+            <p> Predmeti: {profesor.predmeti} </p>
             <button className='crudBtn' onClick={() => handleDelete(profesor.email)}>Obriši profesora</button>
             <Link to={`/update/${profesor.email}`} className='updateLink'> Uredi podatke</Link>
           </div>
