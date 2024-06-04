@@ -1,0 +1,33 @@
+.s {
+    max-width: 800px;
+    margin: 3rem auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .h2_sp{
+    margin: 0;
+    padding: 0;
+  }
+
+  .h1_sp{
+    margin: 0;
+    padding: 0;
+  }
+
+  .img_prof{
+    height: 100px;
+    width: auto;
+  }
+  .lupa{
+    height: 20px;
+    width: auto;
+  }
+  .pretraga{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1rem;
+  }

@@ -48,14 +48,7 @@ button:hover {
 
 /*PROFESORS*/
 
-.s {
-    max-width: 800px;
-    margin: 10rem auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+
   
   h1 {
     text-align: center;
@@ -275,7 +268,7 @@ table td {
 
 /* Glavni stilovi za container */
 .students-container {
-  margin: 20rem auto;
+  margin: 3rem auto;
   max-width: 800px;
   padding: 20px;
   background-color: #f9f9f9;
@@ -314,12 +307,12 @@ table td {
 }
 
 .students-table th {
-  background-color: #f4f4f4;
+  background-color: rgb(208, 107, 34);
   font-weight: bold;
 }
 
 .students-table tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f6bbbb;
 }
 
 /* Dugme za brisanje */

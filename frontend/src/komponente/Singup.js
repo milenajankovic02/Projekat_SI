@@ -54,8 +54,8 @@ function Signup() {
     };
 
     return (
-        <div className="prvidiv">
-            <div className="drugidiv">
+        <div className="prvidiv_s">
+            <div className="drugidiv_s">
                 <h2>Registruj se</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="form">

@@ -1,0 +1,97 @@
+ZAD1.RUMOR
+Vova je sebi obećao da nikada neće igrati kompjuterske igre... Ali nedavno je Firestorm, poznata kompanija za razvoj igara, objavila svoju najnoviju igru, World of Farcraft, i postala je vrlo popularna. Naravno, Vova je počeo da je igra.Sada pokušava da reši zadatak. Zadatak je da dođe do naselja pod imenom Overcity i proširi glasine u njemu.
+Vova zna da u Overcityju ima n likova. Neki likovi su prijatelji jedni drugima i dele informacije koje dobiju. Takođe, Vova zna da može podmititi svakog lika da počne širiti glasine; i-ti lik želi ci zlata kao zamenu za širenje glasina. Kada lik čuje glasinu, on je prenosi svim svojim prijateljima, a oni počinju besplatno širiti glasinu svojim prijateljima, i tako dalje.
+Zadatak je završen kada svi n likovi saznaju za glasinu. Koja je minimalna količina zlata koju Vova treba potrošiti da bi završio zadatak?
+
+ZAD2.NP
+Nedavno su Pari i Arya istraživali NP-teške probleme i pronašli su vrlo interesantan problem minimum vertex cover (najmanji skup čvorova).
+Pretpostavimo da je dat graf G. Podskup A njegovih čvorova naziva se vertex cover (skup čvorova) tog grafa ako za svaku ivicu uv postoji bar jedan krajnji čvor iz tog skupa, tj. (u∈A) ili (v∈A) (ili oboje).
+Pari i Arya su osvojili veliki neusmereni graf kao nagradu na takmičenju timova. Sada ga trebaju podeliti na dva dela, ali oba žele da njihovi delovi grafa budu vertex cover (skup čvorova).
+Dogovorili su se da im date graf i vi trebate pronaći dva disjunktna podskupa njegovih čvorova A i B, pri čemu su oba vertex cover (skup čvorova), ili tvrdite da je to nemoguće. Svaki čvor treba dodeliti najviše jednom od prijatelja (ili ga čak možete zadržati za sebe).
+
+ZAD3.ROAD
+Jedne dnevne, kralj je odlučio da izgradi puteve koji će povezivati parove gradova u zemlji. Putevi mogu biti prohodni u oba smera. On želi da se putevi konstruišu na način da je moguće putovati između svakog grada i bilo kog drugog grada prolazeći najviše kroz dva puta. Takođe, dati sU  m parova gradova gde putevi ne mogu biti izgrađeni. Vaš zadatak je da konstruišete minimalan broj puteva koji i dalje zadovoljavaju navedene uslove. Ograničenja garantuju da je ovo uvek moguće.
+
+ZAD4.BADGE
+Na Letnjoj informatičkoj školi, ukoliko se učenik ne ponaša dobro, nastavnici prave rupu na njegovoj znački. Danas je jedan od nastavnika uhvatio grupu od n učenika kako izvode još jedan trik.Pretpostavimo da su svi ovi učenici numerisani od 1 do n. Nastavnik je došao do učenika a i napravio rupu na njegovoj znački. Međutim, učenik tvrdi da je glavni krivac neki drugi učenik pa.
+Nakon toga, nastavnik je došao do učenika pa i napravio rupu na njegovoj znački. Učenik je odgovorio da je glavni krivac učenik ppa. Ovaj proces je trajao neko vreme, ali pošto je broj učenika konačan, na kraju je nastavnik došao do učenika koji već ima rupu na znački.
+Nakon toga, nastavnik je napravio drugu rupu na znački učenika i odlučio da je završio s ovim procesom, te je otišao u saunu.
+Ne znate koji je prvi učenik koji je uhvaćen od strane nastavnika. Međutim, znate sve brojeve pi. Vaš zadatak je da saznate za svakog učenika a, ko bi bio učenik s dve rupe na znački ako je prvi uhvaćeni učenik bio a.
+
+ZAD5.NEW YEAR:
+Ljudi zive un n ćelija numerisanih celim brojevima od 1 do n, kao tabla 1 × n. Ljudi su želeli da upoznaju ljude koji žive u drugim ćelijama.
+
+Transportni sistem za kretanje između ovih ćelija napravljen sa n - 1 pozitivnih celih brojeva a1, a2, ..., an - 1. Za svaki ceo broj i gde je 1 ≤ i ≤ n - 1 važi uslov 1 ≤ n - 1 i≤ . Zatim je napravio n - 1 portala, numerisanih celim brojevima od 1 do n - 1. I-ti (1 ≤ i ≤ n - 1) portal povezuje ćeliju i i ćeliju (i + ai) i može putovati od ćelije, a i u ćeliju (i + ai) koristeći i-ti portal. Nažalost, portal se ne može koristiti unazad, što znači da se ne može kretati od ćelije (i + ai) u ćeliju i koristeći i-ti portal. Lako je videti da se zbog uslova 1 ≤ ai ≤ n - i ne može napustiti Linijski svet koristeći portale.
+Trenutno stojim u ćeliji 1 i želim da idem u ćeliju t. Međutim, ne znam da li je moguće otići tamo. Molimo vas da odredite da li mogu da odem do ćelije t koristeći samo konstruisani transportni sistem.
+
+ZAD6.PARTY:
+Jedna kompanija ima n zaposlenih koji su numerisani brojevima od 1 do n. Svaki zaposleni ili nema neposrednog menadžera ili ima tačno jednog neposrednog menadžera, koji je drugi zaposleni sa različitim brojem. Zaposleni A se smatra nadređenim zaposlenom B ako je bar jedan od sledećih uslova ispunjen:
+-Zaposleni A je neposredni menadžer zaposlenog B.
+-Zaposleni B ima neposrednog menadžera zaposlenog C takvog da je zaposleni A nadređeni zaposlenog C.
+Kompanija neće imati ciklus menadžera, odnosno neće postojati zaposleni koji je nadređeni svog sopstvenog neposrednog menadžera.
+Danas će kompanija organizovati zabavu. To uključuje podelu svih n zaposlenih u nekoliko grupa, pri čemu svaki zaposleni mora pripadati tačno jednoj grupi. Takođe, u okviru svake grupe ne sme biti dva zaposlena A i B takva da je A nadređeni zaposlenog B.
+Koliko je najmanji broj grupa koje moraju biti formirane?
+
+ZAD7.KEFA I PARK:
+Kefa je odlučio da proslavi svoju prvu veliku platu odlaskom u restoran.
+On živi pored neobičnog parka. Park je korenovano stablo koje se sastoji od n čvorova, pri čemu je koren na čvoru 1. Čvor 1 takođe sadrži Kefinu kuću. Nažalost, za našeg junaka, park takođe sadrži mačke. Kefa je već saznao koji čvorovi sadrže mačke.
+Listovi stabla predstavljaju restorane. Kefa želi da odabere restoran u koji će otići, ali nažalost, veoma se boji mačaka, pa neće ići u restoran ako put od restorana do njegove kuće sadrži više od m uzastopnih čvorova sa mačkama.
+Vaš zadatak je da pomognete Kefi da izbroji koliko restorana može posetiti.
+
+ZAD8.TWO BUTTONS
+Vasya je pronašao čudan uređaj. Na prednjoj ploči uređaja postoje: crveno dugme, plavo dugme i displej koji prikazuje neki pozitivan ceo broj. Kada se pritisne crveno dugme, uređaj množi prikazani broj sa dva. Kada se pritisne plavo dugme, uređaj oduzima jedan od broja na displeju. Ako se u nekom trenutku broj postane negativan, uređaj se pokvari. Displej može prikazivati proizvoljno velike brojeve. Početno, displej prikazuje broj n.
+Bob želi da dobije broj m na displeju. Koliko je minimalan broj pritisaka koje mora izvršiti kako bi postigao taj rezultat?
+
+ZAD9.PROTECT SHEEP
+Bob je farmer. Ima veliki pašnjak sa mnogo ovaca. Nedavno je izgubio neke od njih zbog napada vukova. Zato je odlučio da postavi neke čobanske pse na način da su sve njegove ovce zaštićene.
+
+Pašnjak je pravougaonik koji se sastoji od R × C ćelija. Svaka ćelija je ili prazna, sadrži ovcu, vuka ili psa. Ovce i psi uvek ostaju na mestu, ali vukovi mogu slobodno da se kreću po pašnjaku tako što se ponavljano kreću levo, desno, gore ili dole do susedne ćelije. Kada vuk uđe u ćeliju sa ovcu, on je pojede. Međutim, nijedan vuk ne može ući u ćeliju u kojoj se nalazi pas.
+
+Početno nema pasa. Postavite pse na pašnjaku tako da nijedan vuk ne može dosegnuti nijednu ovcu, ili utvrdite da je to nemoguće. Imajte na umu da, pošto imate mnogo pasa, ne morate minimizirati njihov broj.
+
+
+ZAD10.THE TWO ROUTES
+Postoji n gradova (od 1 do n) i m dvosmernih železnica. Postoji i apsurdno jednostavna putna mreža — za svaki par različitih gradova k i i, postoji dvosmerni put između gradova k i i ako i samo ako između njih nema železnice. Putovanje do drugog grada jednom železnicom ili jednim putem uvek traje tačno jedan sat.
+Voz i autobus napuštaju grad 1 u isto vreme i trebaju stici do grada n, i ne zaustavljaju se na putu (ali mogu da sačekaju u gradu n). Voz može da se kreće samo duž pruga, a autobus samo duž puteva.
+Od vas je zatraženo da isplanirate rute za vozila; svaka ruta može koristiti bilo koji put/železnicu više puta. Jedan od najvažnijih aspekata koji treba uzeti u obzir je bezbednost — da bi se izbegle nezgode na železničkim prelazima, voz i autobus ne smeju stići u isti grad (osim grada n) istovremeno.
+Pod ovim ograničenjima, koji je minimalni broj sati potreban da oba vozila stignu do grada n (maksimalno vreme dolaska autobusa i voza)? Imajte na umu da autobus i voz nisu obavezni da stignu u grad n u isto vreme, ali im je to dozvoljeno.
+
+ZAD11.Mahmoud and Ehab and the bipartiteness
+Stablo je povezan aciklični graf. Bipartitan graf je graf čiji se čvorovi mogu podeliti u 2 skupa na takav način da za svako granično grlo (u, v) koje pripada grafu, u i v pripadaju različitim skupovima.
+Dr. Evil je dao Mahmoudu i Ehabu stablo sa n čvorova i zamolio ih da dodaju grane na njega na način da graf i dalje bude bipartitan. Osim toga, nakon dodavanja ovih grana, graf treba biti jednostavan (ne sme sadržavati petlje ili više grana između istih čvorova). Koliki je maksimalni broj grana koje mogu dodati?
+Petlja je grana koja povezuje čvor sa samim sobom. Graf ne sadrži više grana kada za svaki par čvorova ne postoji više od jedne grane između njih. Ciklus i petlja nisu isto.
+
+
+ZAD12.STRONGLY CONNECTED
+Zamislite grad sa n horizontalnih ulica koje prelaze m vertikalnih ulica, formirajući (n - 1) × (m - 1) mrežu. Kako bi povećao protok saobraćaja, gradonačelnik grada odlučio je da svaka ulica bude jednosmerna. To znači da se u svakoj horizontalnoj ulici saobraćaj kreće samo od zapada ka istoku ili samo od istoka ka zapadu. Takođe, saobraćaj se odvija samo od severa ka jugu ili samo od juga ka severu u svakoj vertikalnoj ulici. U horizontalnu ulicu moguće je ući iz vertikalne ulice, ili obrnuto, na njihovoj raskrsnici.
+Gradonačelnik je dobio neke obrasce pravca ulice. Vaš zadatak je da proverite da li je moguće doći do bilo koje raskrsnice sa bilo koje druge raskrsnice u predloženom obrascu pravca ulice. Znaci da ovaj graf treba da predstavlja ciklus tj da bude u odredjenom oblilku 
+
+ZAD13.POLANDBALL
+PolandBall živi u šumi sa svojom porodicom. U šumi se nalazi nekoliko stabala. Stabla su neusmereni aciklični grafovi sa k čvorova i k-1 grana, gde je k neki ceo broj. Napomena: Jedan čvor predstavlja validno stablo.
+U svakom čvoru svakog stabla živi tačno jedan srodnik, koji ima jedinstveni identifikacioni broj od 1 do n. Za svaku lopticu i znamo identifikacioni broj njenog najudaljenijeg srodnika koji živi u istom stablu. Ako postoji više takvih čvorova, znamo samo vrednost onog sa najmanjim identifikacionim brojem među njima.
+Koliko stabala se nalazi u šumi?
+
+ZAD14.KING ESCAPE
+Alisa i Bob igraju šah na ogromnoj šahovskoj tabli dimenzija n×n. Alisi je ostao samo jedan komad - dama, koja se nalazi na (ax, aj), dok Bob ima samo kralja koji stoji na (bk,bi). Alisa misli da, pošto njena kraljica dominira šahovskom tablom, pobeda je njena.
+Ali Bob je napravio podmukao plan da osvoji pobedu za sebe - mora da maršira svog kralja do (ck,ci) kako bi sebi odneo pobedu. Pošto je Alisa ometena osećajem superiornosti, više ne pomera nijednu figuru, a samo Bob je taj koji se okreće.
+
+Bob će pobediti ako može da pomeri svog kralja sa (bk,bi) do (ck,ci)
+ a da nikada ne dođe pod kontrolu. Zapamtite da kralj može da pređe na bilo koji od 8
+ susedni kvadrati. Kralj je u šahu da li je na istom rangu (tj. redu), fajlu (tj. koloni) ili dijagonali kao i neprijateljska kraljica.
+
+Pronađite da li Bob može da pobedi ili ne.
+
+ZAD15.NETWORK
+Računarska mreža  sastoji se od n računara, neki od njih su povezani kablom. Računari se indeksiraju celim brojevima od 1 do n. Poznato je da su bilo koja dva računara povezana kablom direktno ili preko drugih računara.
+Polikarpus je odlučio da sazna topologiju mreže. Topologija mreže je način opisivanja konfiguracije mreže, šema koja prikazuje lokaciju i veze mrežnih uređaja.
+Polikarpus poznaje tri osnovne topologije mreže: bus (magistrala), ring (prsten) i star (zvezda). Bus je topologija koja predstavlja zajednički kabl sa svim računarima povezanim na njega. U topologiji prstena, kabl povezuje svaki računar samo sa dva druga računara. Zvezda je topologija u kojoj su svi računari mreže povezani sa jednim centralnim čvorom.
+Predstavimo svaku od ovih topologija mreže kao povezani neusmereni graf. Bus je povezani graf koji je jedinstvena putanja, odnosno graf u kojem su svi čvorovi povezani sa još dva čvora, osim za dva čvora koja predstavljaju početak i kraj puta. Prsten je povezani graf u kojem su svi čvorovi povezani sa još dva čvora. Zvezda je povezani graf u kojem je jedan pojedinačni centralni čvor izdvojen i povezan sa svim ostalim čvorovima. Za pojašnjenje, pogledajte sliku.
+Imate povezani neusmereni graf koji opisuje računarsku mrežu u korporaciji Polikarpusa. Pomozite mu da sazna koja je vrsta topologije date mreže. Ako to nije moguće, recite da je topologija mreže nepoznata.
+
+
+ZAD16.METRO
+Alis danas ima rođendan, pa je pozvala kući svog najboljeg druga Boba. Sada Bob treba da pronađe način da putuje do Alisine kuće.
+U gradu u kojem Alis i Bob žive, gradi se prva linija metroa. Ova linija metroa sadrži n
+ stanice numerisane od 1 do  n. Bob živi blizu stanice sa brojem 1, dok Alisa živi u blizini stanice sa brojem s. Linija metroa ima dva koloseka. Vozovi na prvom koloseku idu od stanice 1 do stanice n, a vozovi na drugom koloseku idu u obrnutom smeru. Čim voz dođe do kraja koloseka, odmah odlazi u depo, tako da je posle toga nemoguće putovati njime.
+Neke stanice još uvek nisu otvorene, a neke su samo delimično otvorene — za svaku stanicu i za svaki kolosek se zna da li je stanica zatvorena za tu prugu ili ne. Ako je stanica zatvorena za neki kolosek, svi vozovi koji idu u pravcu ovog koloseka prolaze stanicu bez zaustavljanja na njoj.
+Kada je Bob dobio informacije o otvorenim i zatvorenim stanicama, otkrio je da putovanje metroom može biti neočekivano komplikovano. Pomozite Bobu da odredi da li može da putuje do Alisinog doma metroom ili treba da potraži neki drugi prevoz.

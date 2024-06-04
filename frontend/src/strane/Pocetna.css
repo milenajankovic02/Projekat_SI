@@ -1,75 +1,103 @@
 :root {
-    --pink: #f26118;
-  }
-  
-  * {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    outline: none;
-    border: none;
-    text-decoration: none;
-    transition: 0.2s linear;
-  }
-  
-  /* Header */
+  --pink: #f26118;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  transition: 0.2s linear;
+}
+
+/* Header */
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  padding: 2rem 2%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 1000;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 768px){
   header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    padding: 2rem 9%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    z-index: 1000;
-    box-shadow: 0 0.5rem 1rem rgb(0, 0, 0, 0.1);
+    justify-content:space-around;
   }
+}
+.navdiv1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navdiv1 a {
+  padding: 0 0.5rem;
+}
+
+.navdiv1 img {
+  padding: 0 0.5rem;
+}
+
+header .logo {
+  font-size: 3rem;
+  color: #333;
+  font-weight: bolder;
+}
+
+header .logo span {
+  color: var(--pink);
+}
+
+header .navbar {
+  display: flex;
+  align-items: center;
+}
+
+header .navbar a {
+  font-size: 1.5rem; /* Povećajte veličinu teksta ovde */
+  padding: 0 1rem;
+  color: #666;
+}
+
+header .navbar a:hover {
+  color: var(--pink);
+}
+
+header .icons a {
+  font-size: 3rem;
+  color: #333;
+  margin-left: 1.5rem;
+}
+
+header .icons a:hover {
+  color: var(--pink);
+}
+
+header #toggler {
+  display: none;
+}
+
+header .fa-bars {
+  font-size: 2rem;
+  color: #333;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border: 0.1rem solid rgba(0, 0, 0, 0.3);
+  display: none;
   
-  header .logo {
-    font-size: 3rem;
-    color: #333;
-    font-weight: bolder;
-  }
-  
-  header .logo span {
-    color: var(--pink);
-  }
-  
-  header .navbar a {
-    font-size: 1.2rem;
-    padding: 0 1.5rem;
-    color: #666;
-  }
-  
-  header .navbar a:hover {
-    color: var(--pink);
-  }
-  
-  header .icons a {
-    font-size: 3rem;
-    color: #333;
-    margin-left: 1.5rem;
-  }
-  
-  header .icons a:hover {
-    color: var(--pink);
-  }
-  
-  header #toggler {
-    display: none;
-  }
-  
-  header .fa-bars {
-    font-size: 2rem;
-    color: #333;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1.5rem;
-    cursor: pointer;  
-    border: 0.1rem solid rgba(0, 0, 0, 0.3);
-    display: none;
-  }
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+}
   
   /* Pocetna Section */
   .pocetna {
@@ -80,6 +108,12 @@
     background: url('../slike/background.jpg') no-repeat; 
     background-size: cover;
     background-position: center;
+  }
+
+  .logo-app {
+    width: 4rem; /* Change this value to adjust the width */
+    height: auto;
+    padding-left: 0%;
   }
   
   .sadrzaj h3 {
@@ -255,50 +289,61 @@
     color: var(--pink);
   }
   
-  /* Media Queries */
-  @media (max-width: 991px) {
-    html {
-      font-size: 55%;
-    }
-    header {
-      padding: 2rem;
-    }
-    .about, .contact, .pocetna {
-      padding: 2rem;
-    }
-  }
-  
+
   @media (max-width: 768px) {
-    .fa-bars {
-      display: block;
+    header .fa-bars {
+        display: block;
+        background-color:#f26118;
     }
     header .navbar {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: #eee;
-      border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
-      clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #e3d2c0;
+        border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
+        display: none;
+        flex-direction: column;
+        align-items: center;
     }
     header #toggler:checked ~ .navbar {
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+        display: flex;
     }
     header .navbar a {
-      margin: 1.5rem;
-      padding: 1.5rem;
-      background: #fff;
-      border: 0.1rem solid rgb(0, 0, 0, 0.1);
-      display: block;
+        margin: 1.5rem;
+        padding: 1.5rem;
+        background: #fff;
+        color: black;
+        font-weight: 500;
+        font-size: 2rem;
+        border: 0.1rem solid rgba(0, 0, 0, 0.1);
+        display: block;
+        width: 100%;
+        text-align: center;
     }
+    header .navbar a:hover {
+      background-color: #c34f15;
+      color: white;
   }
-  
-  @media (max-width: 450px) {
+}
+
+@media (max-width: 991px) {
     html {
-      font-size: 50%;
+        font-size: 55%;
+    }
+    header {
+        padding: 2rem;
+    }
+    .about, .contact, .pocetna {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 50%;
     }
     .heading {
-      font-size: 3rem;
+        font-size: 3rem;
     }
-  }
-  
+}

@@ -1,0 +1,40 @@
+.zakazi_h2 {
+    margin-top: 0;
+    padding-top: 0;
+    color: rgb(252, 249, 249);
+}
+.zakazi_cas {
+    margin-bottom: 3rem;
+    margin-top: 3rem;
+    width: 100%;
+    background: url('../slike/pozadinalog.jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.slika_raspored{
+    width: 5rem;
+    height: auto;
+}
+.zakazi_div2{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.prov {
+    background-color: rgba(67, 66, 66, 0.521);
+    width: 100%;
+    padding: 1rem;
+  }
+  .labels_s{
+    color: rgb(250, 247, 247);
+  }
+  .cijena{
+    color: black;
+  }
+  .ocuapdding{
+    padding-bottom: 1rem;
+  }
+  .dugme{
+    background-color: rgb(208, 107, 34);
+  }

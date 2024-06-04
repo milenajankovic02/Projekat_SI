@@ -19,6 +19,8 @@ import { jwtDecode } from 'jwt-decode';
 import ZakazaniCasovi from './komponente/ZakazaniCasovi';
 import StudentProfile from './komponente/StudentProfile';
 import SearchProf from './komponente/SearchProf';
+import BibliotekaUser from './strane/Biblioteka';
+import ChatBot from './strane/ChatBot';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -50,6 +52,8 @@ function App() {
           <Route path="/zakazaniCasovi" element={<ZakazaniCasovi/>}/>
           <Route path="/profile" element={<StudentProfile/>}/>
           <Route path="/search" element={<SearchProf/>}/>
+          <Route path="/biblioteka" element={<BibliotekaUser/>}/>
+          <Route path="/chatbot" element={<ChatBot/>}/>
         </Routes>
         <Footer />
       </Router>

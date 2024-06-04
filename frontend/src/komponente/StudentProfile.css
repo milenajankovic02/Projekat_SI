@@ -1,0 +1,19 @@
+.user-info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.dugmence{
+    background-color: rgb(202, 6, 6);
+}
+.dugmence:hover{
+    background-color: rgb(202, 6, 6);
+}
+.prof_h1{
+    padding: 1rem;
+    margin: 1rem;
+}
+.tabela_sp{
+    background-color: rgb(208, 107, 34);
+}

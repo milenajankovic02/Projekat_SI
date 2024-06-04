@@ -1,30 +1,30 @@
 import React from 'react';
 import '../strane/Pocetna.css'
 import { HashLink as Link } from 'react-router-hash-link'
+import logo from '../slike/logo.png'
 
-//pregled svih zakazanih casova
-//pregled unesenih profesora
-//odjava
 const AdminNav = () => {
+  const handleLinkClick = () => {
+    document.getElementById('toggler').checked = false;
+  };
+
   return (
     <header>
+      <div className="navdiv1">
+      <img src={logo} className="logo-app" alt="logo" />
+      <a href="#" className="logo">All A's<span>.</span></a>
+      </div>
+      <nav className="navbar">
+        <Link to="/#pocetna" onClick={handleLinkClick}>Početna</Link>
+        <Link to="/biblioteka" onClick={handleLinkClick}>Biblioteka</Link>
+        <Link to="/zakazaniCasovi" onClick={handleLinkClick}>Zakazani časovi</Link>
+        <Link to="/profesors" onClick={handleLinkClick}>Pregledaj profesore</Link>
+        <Link to="/students" onClick={handleLinkClick}>Pregledaj studente</Link>
+        <Link to="/logout" onClick={handleLinkClick}>Odjavi se</Link>
+      </nav>
       <input type="checkbox" id="toggler" />
       <label htmlFor="toggler" className="fas fa-bars"></label>
-      <a href="#" className="logo">All A's<span>.</span></a>
-      <nav className="navbar">
-        <Link to="/#pocetna">Početna</Link>
-        <Link to="/#about">O nama</Link>
-        <Link to="/#kontakt">Kontakt</Link>
-        <Link to="/zakazaniCasovi">Zakazani časovi</Link>
-        <Link to="/profesors">Pregledaj profesore</Link>
-        <Link to="/students">Pregledaj studente</Link>
-        <Link to="/logout">Odjavi se</Link>
-      </nav>
-      <div className="icons">
-        <a href="#" className="fa-solid fa-pen"></a>
-        <a href="#" className="fa-solid fa-pen"></a>
-        <a href="#" className="fa-solid fa-pen"></a>
-      </div>
+      
     </header>
   );
 }

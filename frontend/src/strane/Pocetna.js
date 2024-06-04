@@ -32,7 +32,7 @@ const Pocetna = () => {
           <h3>All A's</h3>
           <span>Vaš uspijeh je naš prioritet!</span>
           <p>Unaprijedi proces učenja!</p>
-          <a href="pridruzise" className="btn">Pridruži nam se!</a>
+          <a href="/signup" className="btn">Pridruži nam se!</a>
         </div>
       </section>
       <section className="about" id="about">
@@ -43,7 +43,7 @@ const Pocetna = () => {
             <p>Dobrodošli u našu aplikaciju za zakazivanje časova! Posvećeni smo tome da korisnicima omogućimo što brže i lakše povezivanje sa profesorima za zakazivanje časova i pristup obrazovnim materijalima.
             Naša platforma je dizajnirana da pojednostavi proces pronalaženja pravog tutora, zakazivanja termina, i obezbeđivanja svih resursa potrebnih za vaš akademski uspeh.</p>
             <p>Bilo da ste student koji traži dodatnu pomoć u učenju ili profesor koji nudi usluge podučavanja, naša aplikacija pruža korisnički pristupačan interfejs koji zadovoljava vaše potrebe. Prioritet nam je efikasnost i pristupačnost, kako biste mogli da pronađete pravog tutora i zakažete svoje termine uz samo nekoliko klikova.</p>
-            <a href="#" className="btn">Saznajte više</a>
+            <a href="/chatbot" className="btn">Saznajte više</a>
           </div>
         </div>
       </section>

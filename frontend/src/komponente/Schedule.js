@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import './Schedule.css';
+import raspored from '../slike/raspored.png';
+
 
 const generateAvailableSlots = () => {
   const availableSlots = [];
@@ -15,12 +18,29 @@ const generateAvailableSlots = () => {
   return availableSlots;
 };
 
+
+
 const getEmailFromToken = (token) => {
   try {
     const decoded = jwtDecode(token);
     return decoded.email;
   } catch (error) {
     console.error('Greška prilikom dekodiranja tokena:', error);
+    return null;
+  }
+};
+
+const getIdFromEmail = async (email) => {
+  try {
+    const response = await axios.get('http://localhost:8082/korisnici/id', {
+      params: {
+        email: email
+      }
+    });
+    console.log(response.data);
+    return response.data.id;
+  } catch (error) {
+    console.error('Greška prilikom dohvatanja ID-a korisnika:', error);
     return null;
   }
 };
@@ -46,6 +66,8 @@ const Schedule = () => {
         console.error('Greška prilikom dohvatanja predmeta:', error);
       }
     };
+
+    
 
     const fetchCities = async () => {
       try {
@@ -95,9 +117,10 @@ const Schedule = () => {
     try {
         const token = localStorage.getItem('token');
         const email = getEmailFromToken(token);
+        const id = await getIdFromEmail(email);
 
         const response = await axios.post('http://localhost:8082/casovi', {
-            korisnik: email,
+            korisnik: id,
             profesor: selectedProfessor,
             predmet: selectedSubject,
             datum: date,
@@ -108,53 +131,72 @@ const Schedule = () => {
     } catch (error) {
         console.error('Greška prilikom zakazivanja časa:', error);
     }
-};
+  };
 
   
 
 
   return (
-    <div>
-      <h2>Zakazivanje časa</h2>
-      <label>Odaberite predmet:</label>
+    <div className='zakazi_cas'>
+      <div className='prov'>
+      <div className='zakazi_div2'>
+      <h2 className='zakazi_h2'> Zakazivanje časa</h2>
+      <img src={raspored} className='slika_raspored' alt="raspored"/>
+      </div>
+      <div className='ocuapdding'>
+      <label className='labels_s'>Odaberite predmet:</label>
       <select value={selectedSubject} onChange={(e) => handleSubjectChange(e.target.value)}>
-        <option value="">Odaberite predmet</option>
+      <option disabled hidden value="">
+          Odaberite predmet
+        </option>
         {subjects.map(subject => (
           <option key={subject} value={subject}>{subject}</option>
         ))}
       </select>
-
-      <label>Odaberite grad:</label>
+      </div>
+      <div className='ocuapdding'>
+      <label className='labels_s'>Odaberite grad:</label>
       <select value={selectedCity} onChange={(e) => handleCityChange(e.target.value)}>
-        <option value="">Odaberite grad</option>
+        <option disabled hidden value="">
+          Odaberite grad
+        </option>
         {cities.map(city => (
           <option key={city} value={city}>{city}</option>
         ))}
       </select>
-
-      <label>Odaberite profesora:</label>
+      </div>
+      <div className='ocuapdding'>
+      <label className='labels_s'>Odaberite profesora:</label>
       <select value={selectedProfessor} onChange={(e) => handleProfessorChange(e.target.value)}>
-        <option value="">Odaberite profesora</option>
+      <option disabled hidden value="">
+          Odaberite profesora
+        </option>
         {professors.map(professor => (
           <option key={professor.email} value={professor.email}>{professor.ime} {professor.prezime}</option>
         ))}
       </select>
-
-      <label>Cijena:</label>
-      <input type="text" value={price} disabled />
-
-      <label>Datum:</label>
+      </div>
+      <div className='ocuapdding'>
+      <label className='labels_s'>Cijena:</label>
+      <input className='cijena' type="text" value={price} disabled />
+      </div>
+      <div className='ocuapdding'>
+      <label className='labels_s'>Datum:</label>
       <input type="date" min={new Date().toISOString().split('T')[0]} value={date} onChange={(e) => setDate(e.target.value)} />
-
-      <label>Vrijeme:</label>
+      </div>
+      <div className='ocuapdding'>
+      <label className='labels_s'>Vrijeme:</label>
       <select value={time} onChange={(e) => setTime(e.target.value)}>
-        <option value="">Odaberite vrijeme</option>
+      <option disabled hidden value="">
+          Odaberite vrijeme
+        </option>
         {availableSlots.map(slot => (
           <option key={slot} value={slot}>{slot}</option>
         ))}
       </select>
-
-      <button onClick={handleSubmit}>Zakaži</button>
+      </div>
+      <button className="dugme" onClick={handleSubmit}>Zakaži</button>
+    </div>
     </div>
   );
 };

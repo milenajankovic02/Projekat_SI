@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './ZakazaniCasovi.css';
 
 const ZakazaniCasovi = () => {
   const [bookings, setBookings] = useState([]);
@@ -34,15 +35,16 @@ const ZakazaniCasovi = () => {
 
   return (
     <div>
-      <h2>Zakazani časovi</h2>
+      <h2 className='pgbgpg'>Zakazani časovi</h2>
       <table>
         <thead>
           <tr>
-            <th>Učenik</th>
-            <th>Profesor</th>
-            <th>Predmet</th>
-            <th>Datum</th>
-            <th>Vrijeme</th>
+            <th className='tab'>Učenik</th>
+            <th className='tab'>Profesor</th>
+            <th className='tab'>Predmet</th>
+            <th className='tab'>Datum</th>
+            <th className='tab'>Vrijeme</th>
+            <th className='tab'></th>
           </tr>
         </thead>
         <tbody>
@@ -54,7 +56,7 @@ const ZakazaniCasovi = () => {
               <td>{formatDate(booking.datum)}</td>
               <td>{booking.vrijeme}</td>
               <td>
-                <button onClick={() => handleCancel(booking.id)}>Otkazi</button>
+                <button className='dugme_tab'onClick={() => handleCancel(booking.id)}>Otkazi</button>
               </td>
             </tr>
           ))}

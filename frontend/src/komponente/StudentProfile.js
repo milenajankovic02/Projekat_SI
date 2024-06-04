@@ -1,8 +1,7 @@
-// Profile.js
-
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
+import './StudentProfile.css';
 
 const StudentProfile = ({ onClose }) => {
   const [userData, setUserData] = useState(null);
@@ -48,7 +47,7 @@ const StudentProfile = ({ onClose }) => {
   return (
     <div className="profile-container">
       <div className="profile-content">
-        <h1>Korisnik</h1>
+        <h1 className='prof_h1' >Korisnik</h1>
         {userData ? (
           <div className="user-info">
             <span className='tag'>Ime: {userData.ime}</span>
@@ -59,16 +58,16 @@ const StudentProfile = ({ onClose }) => {
           <p>Dohvatanje podataka o korisniku...</p>
         )}
 
-        <h2>Moji zakazani časovi</h2>
+        <h2  className='prof_h1'>Moji zakazani časovi</h2>
         {userBookings.length > 0 ? (
           <table>
             <thead>
               <tr>
-                <th>Profesor</th>
-                <th>Predmet</th>
-                <th>Datum</th>
-                <th>Vrijeme</th>
-                <th>Akcije</th>
+                <th className='tabela_sp'>Profesor</th>
+                <th className='tabela_sp'>Predmet</th>
+                <th className='tabela_sp'>Datum</th>
+                <th className='tabela_sp'>Vrijeme</th>
+                <th className='tabela_sp'>Akcije</th>
               </tr>
             </thead>
             <tbody>
@@ -79,7 +78,7 @@ const StudentProfile = ({ onClose }) => {
                   <td>{formatDate(booking.datum)}</td>
                   <td>{booking.vrijeme}</td>
                   <td>
-                    <button onClick={() => handleCancel(booking.id)}>Otkazi</button>
+                    <button className='dugmence' onClick={() => handleCancel(booking.id)}>Otkazi</button>
                   </td>
                 </tr>
               ))}

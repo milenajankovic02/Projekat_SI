@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
+import prof from '../slike/profil.png';
+
 const Profesors = () => {
   const [profesori, setProfesori] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -58,7 +60,8 @@ const Profesors = () => {
       <div className='profesori'>
         {filteredProfesori.map(profesor => (
           <div className='profesor' key={profesor.email}>
-            <h2> {profesor.ime} {profesor.prezime} </h2>
+           <img src={prof} className='img_prof' alt='profil'/>
+            <h2 className='h2_sp'> {profesor.ime} {profesor.prezime} </h2>
             <p> Adresa: {profesor.adresa} </p>
             <p> Grad: {profesor.grad} </p>
             <p> Telefon: {profesor.tel} </p>

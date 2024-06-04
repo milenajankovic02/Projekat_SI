@@ -3,17 +3,56 @@ const mysql = require("mysql");
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken'); // Import jwt
+const nodemailer = require('nodemailer');
+const fileUpload = require("express-fileupload");
+
+const path = require('path');
 
 const app = express();
+
+const fs = require('fs');
+
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(fileUpload());
+
+let transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: 'all.a.business.mne@gmail.com',  // Unesite svoj e-mail
+    pass: 'cive joiu tini twku'           // Unesite svoju lozinku
+  }
+});
+
+app.post('/send-email', async (req, res) => {
+  const { name, email, message } = req.body;
+
+  // Podaci za slanje e-maila
+  let mailOptions = {
+    from: 'all.a.business.mne@gmail.com',    // Unesite svoj e-mail
+    to: 'all.a.business.mne@gmail.com', // Unesite e-mail primaoca
+    subject: 'Poruka sa vaše web stranice',
+    text: `Ime: ${name}\nEmail: ${email}\nPoruka: ${message}`
+  };
+
+  // Slanje e-maila
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.error('Greška prilikom slanja e-maila:', error);
+      res.status(500).send('Došlo je do greške prilikom slanja e-maila.');
+    } else {
+      console.log('E-mail uspješno poslat:', info.response);
+      res.status(200).send('E-mail uspješno poslat!');
+    }
+  });
+});
 
 const db = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "root123",
+    password: "root1234",
     database: "all_a"
 });
 
@@ -72,10 +111,124 @@ app.post('/login', (req, res) => {
     if (lozinka !== user.lozinka) {
       return res.status(400).json({ error: 'Pogrešan email ili lozinka.' });
     }
+    console.log('Rezultati iz baze login:', user);
 
     // Generiši JWT token
     const token = jwt.sign({ email: user.email, role: user.uloga }, 'tajna_tajna_tajna', { expiresIn: '1h' });
     res.json({ token });
+  });
+});
+
+app.get('/biblioteka', (req, res) => {
+  const q = "SELECT * FROM biblioteka";
+  db.query(q, (err, results) => {
+    if (err) {
+      console.error('Greška prilikom dohvatanja fajlova:', err);
+      return res.status(500).json({ error: 'Greška prilikom dohvatanja fajlova' });
+    }
+    res.json(results);
+  });
+});
+
+// Metoda za upload fajla
+app.post('/upload', (req, res) => {
+  if (!req.files || Object.keys(req.files).length === 0) {
+    console.log("uzas");
+    return res.status(400).json({ error: 'No files were uploaded.' }); 
+  }
+
+  const file = req.files.file;
+  const uploadPath = path.join(__dirname, 'biblioteka', file.name);
+
+  file.mv(uploadPath, function (err) {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+
+    const q = "INSERT INTO biblioteka (ime, predmet, opis, putanja, korisnik_id) VALUES (?, ?, ?, ?, ?)";
+    const values = [
+      req.body.ime,
+      req.body.predmet,
+      req.body.opis,
+      uploadPath,
+      req.body.korisnik_id
+    ];
+
+    db.query(q, values, (err, results) => {
+      if (err) {
+        console.error('Greška prilikom unosa fajla u bazu:', err);
+        return res.status(500).json({ error: 'Greška prilikom unosa fajla u bazu' });
+      }
+      res.json({ success: true, message: 'Fajl uspešno uploadovan' });
+    });
+  });
+});
+
+// Metoda za preuzimanje fajla
+app.get('/download/:id', (req, res) => {
+  const fileId = req.params.id;
+  const q = "SELECT putanja FROM biblioteka WHERE id = ?";
+
+  db.query(q, [fileId], (err, results) => {
+    if (err) {
+      console.error('Greška prilikom dohvatanja putanje fajla:', err);
+      return res.status(500).json({ error: 'Greška prilikom dohvatanja putanje fajla' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Fajl nije pronađen' });
+    }
+
+    const filePath = results[0].putanja;
+    res.download(filePath);
+  });
+});
+
+// Metoda za brisanje fajla
+app.delete('/delete/:id', (req, res) => {
+  const fileId = req.params.id;
+  const q = "SELECT putanja FROM biblioteka WHERE id = ?";
+
+  db.query(q, [fileId], (err, results) => {
+    if (err) {
+      console.error('Greška prilikom dohvatanja putanje fajla:', err);
+      return res.status(500).json({ error: 'Greška prilikom dohvatanja putanje fajla' });
+    }
+
+    if (results.length === 0) {
+      return res.status(404).json({ error: 'Fajl nije pronađen' });
+    }
+
+    const filePath = results[0].putanja;
+
+    fs.unlink(filePath, (err) => {
+      if (err) {
+        console.error('Greška prilikom brisanja fajla:', err);
+        return res.status(500).json({ error: 'Greška prilikom brisanja fajla' });
+      }
+
+      const deleteQuery = "DELETE FROM biblioteka WHERE id = ?";
+      db.query(deleteQuery, [fileId], (err, results) => {
+        if (err) {
+          console.error('Greška prilikom brisanja fajla iz baze:', err);
+          return res.status(500).json({ error: 'Greška prilikom brisanja fajla iz baze' });
+        }
+        res.json({ success: true, message: 'Fajl uspešno obrisan' });
+      });
+    });
+  });
+});
+
+// Metoda za dohvaćanje predmeta
+app.get('/predmeti', (req, res) => {
+  const q = "SELECT naziv FROM predmeti";
+  db.query(q, (err, results) => {
+    if (err) {
+      console.error('Greška prilikom dohvatanja predmeta:', err);
+      return res.status(500).json({ error: 'Greška prilikom dohvatanja predmeta' });
+    }
+    const predmeti = results.map(row => row.naziv);
+    return res.json(predmeti);
   });
 });
 
@@ -145,13 +298,18 @@ app.post('/profesor_predmet', (req, res) => {
 
 // Prikaz profesora
 app.get('/profesori', (req, res) => {
-    const query = "SELECT * FROM profesori";
+  const query = `
+  SELECT p.email, p.ime, p.prezime, p.grad, p.adresa, p.tel, p.nivo, GROUP_CONCAT(pp.predmet) AS predmeti
+  FROM profesori p
+  LEFT JOIN profesor_predmet pp ON p.email = pp.email
+  GROUP BY p.email, p.ime, p.prezime, p.grad, p.adresa, p.tel, p.nivo;`;
+
     db.query(query, (err, results) => {
         if (err) {
             console.error('Greška pri dohvatanju profesora: ', err);
             return res.status(500).json({ error: 'Greška pri dohvatanju profesora.' });
         }
-        console.log('Rezultati iz baze:', results);
+        console.log('Rezultati iz baze pretraga profesora:', results);
         res.json(results);
     });
 });
@@ -162,10 +320,13 @@ app.get('/profesori/pretraga', (req, res) => {
   const { predmet, grad } = req.query;
   
   const q = `
-      SELECT p.email, p.ime, p.prezime, pp.cijena 
-      FROM profesori p
-      JOIN profesor_predmet pp ON p.email = pp.profesor
-      WHERE pp.predmet = ? AND p.grad = ?`;
+  SELECT p.email, p.ime, p.prezime, pp.cijena 
+  FROM profesori p
+  JOIN profesor_predmet pp ON p.email = pp.email
+  JOIN gradovi g ON p.grad = g.naziv
+  JOIN predmeti pr ON pp.predmet = pr.naziv
+  WHERE pr.naziv = ? AND g.naziv = ?
+  `;
 
     db.query(q, [predmet, grad], (err, results) => {
     if (err) {
@@ -173,8 +334,28 @@ app.get('/profesori/pretraga', (req, res) => {
       return res.status(500).json({ error: 'Greška prilikom dohvatanja profesora' });
     }
     res.json(results);
+    console.log('nenene:', results);
   });
 });
+
+// Ruta za dobijanje ID-a korisnika na osnovu email adrese
+app.get('/korisnici/id', (req, res) => {
+  const { email } = req.query;
+  
+  const q = "SELECT id FROM korisnici WHERE email = ?";
+  
+  db.query(q, [email], (err, result) => {
+    if (err) {
+      console.error('Greška prilikom dohvatanja ID-a korisnika:', err);
+      return res.status(500).json({ error: 'Greška prilikom dohvatanja ID-a korisnika' });
+    }
+    if (result.length === 0) {
+      return res.status(404).json({ error: 'Korisnik nije pronađen' });
+    }
+    res.json({ id: result[0].id });
+  });
+});
+
 
 
 //Prikaz profesor_predmet
