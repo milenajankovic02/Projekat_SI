@@ -17,7 +17,6 @@ function Validation(values) {
     {
         errors.email = "Nevalidan format email adrese.";
     }
-
     if (!values.lozinka) 
     {
         errors.lozinka = "Lozinka ne smije biti prazna.";

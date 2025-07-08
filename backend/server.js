@@ -1,5 +1,13 @@
 const express = require("express");
 const mysql = require("mysql");
+const conn = mysql.createConnection({
+  host: process.env.DB_HOST   || 'localhost',
+  user: process.env.DB_USER   || 'root',
+  password: process.env.DB_PASSWORD || 'examplepass',
+  database: process.env.DB_NAME || 'si_db',
+  port: process.env.DB_PORT   || 3306,
+});
+
 const cors = require("cors");
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken'); // Import jwt
